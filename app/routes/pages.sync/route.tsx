@@ -1,6 +1,5 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
-import Layout from "../components/Layout";
+import SyncDataPage from "~/views/pages/sync";
 
 export const loader = async ({
   request,
@@ -10,10 +9,6 @@ export const loader = async ({
   return json({ success: 1, data: ["123123123132"] });
 };
 
-export default function Pages() {
-  return (
-    <Layout>
-      <Outlet />
-    </Layout>
-  );
+export default function PagesSync() {
+  return <SyncDataPage />;
 }

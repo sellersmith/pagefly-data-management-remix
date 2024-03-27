@@ -1,8 +1,5 @@
-import { Outlet } from "@remix-run/react"
-import Layout from "../components/Layout"
+import PagesPage from "~/views/pages";
 
 export default function PagesIndex() {
-  return (
-    <div>Pages</div>
-  )
+  return <PagesPage />;
 }
