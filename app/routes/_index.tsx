@@ -1,23 +1,18 @@
 import type { MetaFunction, TypedResponse } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { mongoProd } from "app/db.server";
-import { useEffect } from "react";
+import { mongoRc } from "app/db.server";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "PageFly Management System" }];
 };
 
 export const loader = async (): Promise<
   TypedResponse<{ success: boolean; data: any }>
 > => {
   // Use connect method to connect to the server
-  await mongoProd.connect();
-  console.log("Connected successfully to server");
-  const db = mongoProd.db("pagefly");
+
+  const db = mongoRc.db("pagefly");
   const collection = db.collection("shops");
   const data = await collection.find({}).toArray();
 
@@ -29,10 +24,6 @@ export const loader = async (): Promise<
 
 export default function Index() {
   const { data } = useLoaderData<typeof loader>();
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
