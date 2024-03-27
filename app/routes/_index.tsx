@@ -21,6 +21,9 @@ export default function Index() {
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix</h1>
       <h1 className="text-3xl underline m-5">Hello world!</h1>
+      <h2 className="text-blue-600 font-extrabold text-5xl">
+        TailwindCSS Is Working!
+      </h2>
       <ul>
         <li>
           <a
