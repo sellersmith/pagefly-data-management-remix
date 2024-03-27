@@ -34,4 +34,8 @@ if (process.env.NODE_ENV !== "production") {
   console.log("Connected successfully to server");
 }
 
-export { mongoProd, mongoRc, mongoWip };
+export const mongoClient = {
+  prod: mongoProd.db("pagefly"),
+  rc: mongoRc.db("pagefly"),
+  wip: mongoWip.db("pagefly"),
+};

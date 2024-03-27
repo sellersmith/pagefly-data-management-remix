@@ -1,7 +1,7 @@
 import type { MetaFunction, TypedResponse } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { mongoRc } from "app/db.server";
+import { mongoClient } from "app/db.server";
 
 export const meta: MetaFunction = () => {
   return [{ title: "PageFly Management System" }];
@@ -12,8 +12,7 @@ export const loader = async (): Promise<
 > => {
   // Use connect method to connect to the server
 
-  const db = mongoRc.db("pagefly");
-  const collection = db.collection("shops");
+  const collection = mongoClient.rc.collection("shops");
   const data = await collection.find({}).toArray();
 
   return json({
