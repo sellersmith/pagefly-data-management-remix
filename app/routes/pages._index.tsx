@@ -1,3 +1,5 @@
+import PagesPage from "~/views/pages";
+
 export default function PagesIndex() {
-  return <div>Pages</div>;
+  return <PagesPage />;
 }
