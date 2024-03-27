@@ -22,7 +22,7 @@ export const loader = async (): Promise<
 
 export default function Index() {
   const { data } = useLoaderData<typeof loader>();
-  console.log(data);
+
   return (
     <Layout>
       <div>
