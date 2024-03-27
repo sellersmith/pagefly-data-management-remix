@@ -4,7 +4,7 @@ export const meta: MetaFunction = () => {
   return [{ title: 'PageFly Management System' }]
 }
 
-export const action = async (params: ActionFunctionArgs) => {}
+export const action = async ({ request, params, context }: ActionFunctionArgs) => {}
 
 export default function Login() {
   return (
@@ -66,7 +66,6 @@ export default function Login() {
               </button>
             </div>
           </form>
-          
         </div>
       </div>
     </>
