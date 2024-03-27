@@ -28,7 +28,6 @@ export default function Index() {
     <Layout>
       <div>
         <h1>Welcome to Remix</h1>
-        <h1 className='text-3xl underline m-5'>Hello world!</h1>
         <h2 className='text-blue-600 font-extrabold text-5xl'>TailwindCSS Is Working!</h2>
         <ul>
           <li>
