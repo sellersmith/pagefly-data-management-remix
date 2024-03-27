@@ -1,7 +1,7 @@
 import type { MetaFunction, TypedResponse } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { DBDevelopment, connectDatabases } from "app/db.server";
+import { DB } from "app/db.server";
 import Layout from "../components/Layout";
 
 export const meta: MetaFunction = () => {
@@ -11,10 +11,7 @@ export const meta: MetaFunction = () => {
 export const loader = async (): Promise<
   TypedResponse<{ success: boolean; data: any }>
 > => {
-  // Use connect method to connect to the server
-  await connectDatabases();
-  const db = DBDevelopment.db("pagefly");
-  const collection = db.collection("shops");
+  const collection = DB.wip.collection("shops");
   const data = await collection.find({}).toArray();
 
   return json({
