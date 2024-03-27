@@ -1,7 +1,7 @@
 import type { MetaFunction, TypedResponse } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import { mongoRc } from 'app/db.server'
+import { DBDevelopment } from 'app/db.server'
 import Layout from '../components/Layout'
 
 export const meta: MetaFunction = () => {
@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
 export const loader = async (): Promise<TypedResponse<{ success: boolean; data: any }>> => {
   // Use connect method to connect to the server
 
-  const db = mongoRc.db('pagefly')
+  const db = DBDevelopment.db('pagefly')
   const collection = db.collection('shops')
   const data = await collection.find({}).toArray()
 
@@ -26,7 +26,7 @@ export default function Index() {
 
   return (
     <Layout>
-      <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
+      <div>
         <h1>Welcome to Remix</h1>
         <h1 className='text-3xl underline m-5'>Hello world!</h1>
         <h2 className='text-blue-600 font-extrabold text-5xl'>TailwindCSS Is Working!</h2>
