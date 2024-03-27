@@ -1,3 +1,7 @@
+import PageHeading from "~/components/PageHeading";
+
 export default function ModifyDataPage() {
-  return <h1>ModifyDataPage</h1>;
+  return (
+    <PageHeading title={"Modify page data"} backAction={{ url: "/pages" }} />
+  );
 }

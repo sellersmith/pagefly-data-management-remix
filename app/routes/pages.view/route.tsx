@@ -1,6 +1,5 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import SyncDataPage from "~/views/pages/sync";
-import ViewwDataPage from "~/views/pages/view";
+import ViewDataPage from "~/views/pages/view";
 
 export const loader = async ({
   request,
@@ -11,5 +10,5 @@ export const loader = async ({
 };
 
 export default function PagesView() {
-  return <ViewwDataPage />;
+  return <ViewDataPage />;
 }

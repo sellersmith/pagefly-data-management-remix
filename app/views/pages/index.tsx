@@ -9,25 +9,18 @@ import { classNames } from "~/utils/classnames";
 
 const features = [
   {
-    title: "Sync data",
-    navigate: "sync",
-    icon: DocumentDuplicateIcon,
-    iconForeground: "text-teal-700",
-    iconBackground: "bg-teal-50",
-  },
-  {
-    title: "Export data",
-    navigate: "export",
-    icon: ArrowDownTrayIcon,
-    iconForeground: "text-purple-700",
-    iconBackground: "bg-purple-50",
-  },
-  {
     title: "View data",
     navigate: "view",
     icon: EyeIcon,
     iconForeground: "text-sky-700",
     iconBackground: "bg-sky-50",
+  },
+  {
+    title: "Sync data",
+    navigate: "sync",
+    icon: DocumentDuplicateIcon,
+    iconForeground: "text-teal-700",
+    iconBackground: "bg-teal-50",
   },
   {
     title: "Modify data",
