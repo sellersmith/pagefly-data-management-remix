@@ -31,7 +31,7 @@ export default function Index() {
   const { data } = useLoaderData<typeof loader>();
 
   useEffect(() => {
-    console.log(1);
+    console.log(data);
   }, [data]);
 
   return (
