@@ -1,5 +1,8 @@
 import type { MetaFunction, TypedResponse } from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { mongoProd } from "app/db.server";
+import { useEffect } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,14 +12,28 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async (): Promise<
-  TypedResponse<{ success: boolean }>
+  TypedResponse<{ success: boolean; data: any }>
 > => {
+  // Use connect method to connect to the server
+  await mongoProd.connect();
+  console.log("Connected successfully to server");
+  const db = mongoProd.db("pagefly");
+  const collection = db.collection("shops");
+  const data = await collection.find({}).toArray();
+
   return json({
     success: true,
+    data,
   });
 };
 
 export default function Index() {
+  const { data } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix</h1>
