@@ -1,45 +1,46 @@
 import {
-  ClockIcon,
-  CheckBadgeIcon,
-  UsersIcon,
-  BanknotesIcon,
-  ReceiptRefundIcon,
-  AcademicCapIcon,
+  ArrowDownTrayIcon,
+  DocumentDuplicateIcon,
+  EyeIcon,
+  PencilSquareIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "@remix-run/react";
 import { classNames } from "~/utils/classnames";
 
 const features = [
   {
-    title: "Clone data",
-    href: "#",
-    icon: ClockIcon,
+    title: "Sync data",
+    navigate: "sync",
+    icon: DocumentDuplicateIcon,
     iconForeground: "text-teal-700",
     iconBackground: "bg-teal-50",
   },
   {
-    title: "Benefits",
-    href: "#",
-    icon: CheckBadgeIcon,
+    title: "Export data",
+    navigate: "export",
+    icon: ArrowDownTrayIcon,
     iconForeground: "text-purple-700",
     iconBackground: "bg-purple-50",
   },
   {
-    title: "Schedule a one-on-one",
-    href: "#",
-    icon: UsersIcon,
+    title: "View data",
+    navigate: "view",
+    icon: EyeIcon,
     iconForeground: "text-sky-700",
     iconBackground: "bg-sky-50",
   },
   {
-    title: "Payroll",
-    href: "#",
-    icon: BanknotesIcon,
+    title: "Modify data",
+    navigate: "modify",
+    icon: PencilSquareIcon,
     iconForeground: "text-yellow-700",
     iconBackground: "bg-yellow-50",
   },
 ];
 
 export default function PagesPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
       {features.map((action, actionIdx) => (
@@ -70,7 +71,10 @@ export default function PagesPage() {
           </div>
           <div className="mt-8">
             <h3 className="text-base font-semibold leading-6 text-gray-900">
-              <a href={action.href} className="focus:outline-none">
+              <a
+                onClick={() => navigate(action.navigate)}
+                className="focus:outline-none"
+              >
                 {/* Extend touch target to entire panel */}
                 <span className="absolute inset-0" aria-hidden="true" />
                 {action.title}
