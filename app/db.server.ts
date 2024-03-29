@@ -16,17 +16,17 @@ const DBDevelopment: MongoClient =
 if (process.env.NODE_ENV !== "production") {
   if (!global.DBMaster || !global.DBStaging) {
     global.DBMaster = new MongoClient(process.env.PROD_DATABASE_URL || "");
-    await global.DBMaster.connect();
+    global.DBMaster.connect();
   }
 
   if (!global.DBStaging) {
     global.DBStaging = new MongoClient(process.env.RC_DATABASE_URL || "");
-    await global.DBStaging.connect();
+    global.DBStaging.connect();
   }
 
   if (!global.DBDevelopment) {
     global.DBDevelopment = new MongoClient(process.env.WIP_DATABASE_URL || "");
-    await global.DBDevelopment.connect();
+    global.DBDevelopment.connect();
   }
   console.log("😘😘😘 Connected successfully to server");
 }
