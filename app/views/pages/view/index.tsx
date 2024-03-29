@@ -2,6 +2,8 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
+import JsonView from "react18-json-view";
+import ErrorBanner from "~/components/ErrorBanner";
 import PageHeading from "~/components/PageHeading";
 import { EEnvironments } from "~/constants/enum";
 import { classNames } from "~/utils/classnames";
@@ -18,10 +20,12 @@ export default function ViewDataPage() {
     environments[1]
   );
   const [pageId, setPageId] = useState("");
+  const [error, setError] = useState("");
+  const [pageData, setPageData] = useState(null);
   const submit = useHTTP();
 
   return (
-    <form>
+    <>
       <PageHeading title={"View page data"} backAction={{ url: "/pages" }} />
       <div className="border-b border-gray-900/10 pb-12 mt-10">
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -136,21 +140,35 @@ export default function ViewDataPage() {
         </button>
         <button
           onClick={async () => {
-            const data = await submit(
+            const response = await submit(
               {
                 body: JSON.stringify({
                   pageId,
-                  selectedEnvironment,
+                  selectedEnvironment: selectedEnvironment.value,
                 }),
               },
               { method: "POST", navigate: false }
             );
+            if (response.success) {
+              setPageData(response.data);
+              setError("");
+            } else {
+              setError(
+                typeof response.message === "string"
+                  ? response.message
+                  : "Query failed"
+              );
+              setPageData(null);
+            }
           }}
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           View
         </button>
       </div>
-    </form>
+
+      {!!error && <ErrorBanner heading={error} />}
+      {!!pageData && <JsonView src={pageData} />}
+    </>
   );
 }
